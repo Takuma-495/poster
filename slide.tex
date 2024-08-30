@@ -20,11 +20,20 @@
 {\begin{beamerboxesrounded}[upper=upcolor,lower=lowcolor,shadow=true]}%
 {\end{beamerboxesrounded}}%
 
+%itemizeの設定
+%\setbeamertemplate{itemize item}{\normalsize\raise1.0pt\hbox{$\bullet$}}
+%\setbeamertemplate{itemize subitem}{\normalsize\raise1.0pt\hbox{$\blacktriangleright$}}
+%\setbeamertemplate{itemize subsubitem}{\normalsize\raise1.0pt\hbox{$\bigstar$}}
+\setbeamertemplate{itemize item}{\normalsize\raise0.5pt\hbox{$\bullet$}}
+\setbeamertemplate{itemize subitem}{\normalsize\raise1.0pt\hbox{$\blacktriangleright$}}
+\setbeamertemplate{itemize subsubitem}{\normalsize\raise1.5pt\hbox{$\bigstar$}}
+\renewcommand{\baselinestretch}{1.1}  % 行間設定
+
 % 本文のタイトルなど
 \title{Artificial Bee Colonyアルゴリズムによる\\サポートベクトルマシン
 のハイパーパラメータ最適化}
-\author{2131007 安達拓真}
-\institute{千葉工業大学 情報科学部 情報工学科 4年 安達拓真}
+\author{2131007 安達 拓真}
+\institute{千葉工業大学 情報科学部 情報工学科 4年 山口研究室}
 \date{2024年9月3日}
 
 
@@ -51,29 +60,29 @@
 \end{frame}
 
 
-\begin{frame}
-    \frametitle{ハイパーパラメータ最適化(HPO)}
-    \begin{itemize}
-      \item 機械学習の性能を最大限に発揮するには適切な\\ハイパーパラメータの設定が必要不可欠
-      \item 手動では経験的に決めることが多く時間のかかる作業
-       \begin{itemize}
-         \item 自動で調節する研究が行われている
-       \end{itemize}
-      \item 一般的に計算量が大きいため効率的な探索が必要
-      \item 離散値、連続値、カテゴリ変数など様々な値を扱う必要がある
-    \end{itemize}
-  \end{frame}
+%   \frametitle{ハイパーパラメータ最適化(HPO)}
+ %   \begin{itemize}
+  %    \item 機械学習の性能を最大限に発揮するには適切な\\ハイパーパラメータの設定が必要不可欠
+  %    \item 手動では経験的に決めることが多く時間のかかる作業
+  %     \begin{itemize}
+  %       \item 自動で調節する研究が行われている
+   %    \end{itemize}
+   %   \item 一般的に計算量が大きいため効率的な探索が必要
+   %   \item 離散値、連続値、カテゴリ変数など様々な値を扱う必要がある
+   % \end{itemize}
+  %\end{frame}
   \begin{frame}
     \frametitle{Artificial Bee Colony(ABC)アルゴリズム}
     \begin{itemize}
       \item 蜂の採餌行動に着目した最適化アルゴリズム\footnote{Karaboga, Dervis. An idea based on honey bee swarm for numerical optimization. Vol. 200. Technical report-tr06, Erciyes university, engineering faculty, computer engineering department, 2005.}
-      \item 働き蜂、追従蜂、偵察蜂の三種類の蜂によって各個体(食物源)の探索を行い、最適解を求める
+      \item 働き蜂、追従蜂、偵察蜂の三種類の蜂によって各食物源の探索を行い、最適解を求める
       %\item 連続値の最適化を前提としている
       \item ABC自体の設定パラメータは少ない
     \end{itemize}
   \end{frame}
   \begin{frame}
-    \frametitle{先行研究におけるSVMのハイパーパラメータ最適化}
+    \frametitle{先行研究\footnote{近藤 久，浅沼 由馬“人工蜂コロニーアルゴリズムによるランダムフォレストとサポートベクトルマシン
+    のハイパーパラメータ最適化と特徴選択”，人工知能学会論文誌, vol34-2, pp.1-11, 2019.}におけるSVMのハイパーパラメータ最適化}
     \begin{itemize}
       \item ABCアルゴリズムを使用
       \item カーネル関数をガウスカーネルに固定
@@ -87,14 +96,14 @@
 \end{frame}
   \section{問題点}
   \begin{frame}
-    \frametitle{カーネル関数を固定することの問題点}
-    
+    \frametitle{問題点}
     \begin{itemize}
-      \item カーネル関数はSVMの性能に大きな影響を与える
-     \item ハイパーパラメータ空間の探索範囲が限定的
-    \begin{itemize}
-      \item カーネル関数が変わるとハイパーパラメータの数も変わる
+      \item カーネル関数をガウスカーネルに固定している
+      \begin{itemize}
+       \item SVMにはガウスカーネル以外にも様々なカーネル関数が適用できる      
+      \item カーネル関数によってハイパーパラメータが異なる
     \end{itemize}
+    \item ハイパーパラメータ空間の探索範囲が限定的
   \end{itemize}
 \end{frame}
   
@@ -102,12 +111,13 @@
   \begin{frame}
     \frametitle{提案手法}
     \begin{itemize}
-      \item 4つのカーネル関数とそのハイパーパラメータも最適化対象とすることでより広いハイパーパラメータ空間を探索する 
+      \item 4つのカーネル関数とそのハイパーパラメータも最適化対象とする
       \item ABCアルゴリズムにおける解表現は以下のようにする
       \begin{align*}
         \text{解表現：(カーネル関数, C, gamma, coef0, degree)}
       \end{align*}
-      \item gamma, coef0, degreeの3つはカーネル関数がもつハイパーパラメータでありカーネル関数によって取捨選択する 
+      \item gamma, coef0, degreeの3つはカーネル関数がもつハイパーパラメータであり
+      カーネル関数によって取捨選択する 
       \item カーネル関数の更新はランダムに選ばれた個体とのルーレット選択  
     \end{itemize}
     \begin{align*}
