@@ -50,7 +50,7 @@
 \frametitle{サポートベクトルマシン(SVM)}
 \begin{itemize}
     \item 1995年にC.Cortesらが提案した機械学習アルゴリズム\footnote{ Cortes, C. and Vapnik, V. Support-vector networks, Ma-chine Learning, Vol.20, No.3, pp.273-297, 1995.}
-    \item カーネルトリックを使用して、非線形データを高次元空間に写像し、線形分離可能にする 
+    \item 非線形データを高次元空間に写像し、線形分離可能にする 
     \item データを分類する最適な境界線(超平面)を探す                
   \end{itemize}
   \begin{figure}
@@ -116,8 +116,8 @@
       \begin{align*}
         \text{解表現：(カーネル関数, C, gamma, coef0, degree)}
       \end{align*}
-      \item gamma, coef0, degreeの3つはカーネル関数がもつハイパーパラメータであり
-      カーネル関数によって取捨選択する 
+      \item カーネル関数によって異なるハイパーパラメータは
+      カーネル関数の値によって取捨選択する 
       \item カーネル関数の更新はランダムに選ばれた個体とのルーレット選択  
     \end{itemize}
     \begin{align*}
