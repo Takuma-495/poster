@@ -153,7 +153,7 @@
                   
                    %  ここも図がほしいです
         
-                  \item カーネルトリックを使用して、非線形データを高次元空間に写像し、線形分離可能にする 
+                  \item カーネルトリックを使用して、非線形データを\\高次元空間に写像し、線形分離可能にする 
                   \item データを分類する最適な境界線(超平面)を探す                
                 \end{itemize}
                 \begin{figure}
@@ -167,6 +167,9 @@
                 %いらないかも
                 \item 機械学習の性能を最大限に発揮するには適切な\\ハイパーパラメータの選択が必要不可欠
                 \item 手動で経験的に決めることが多い
+                \begin{itemize}
+                  \item 自動で選択する研究が行われている
+                \end{itemize}
                 \item HPOは一般的に計算量が大きい
                 \begin{itemize}
                   \item 効率的なパラメータ空間の探索が必要
@@ -182,7 +185,7 @@
             \begin{mybox}{Artificial Bee Colony(ABC)アルゴリズム}
               \begin{itemize}
                 \item 蜂の採餌行動に着目した最適化アルゴリズム[2]
-                \item 働き蜂、追従蜂、偵察蜂の三種類の蜂によって各個体(食物源)の探索を行い、最適解を求める
+                \item 働き蜂、追従蜂、偵察蜂の三種類の蜂によって\\各個体(食物源)の探索を行い、最適解を求める
                 %\item 連続値の最適化を前提としている
                 \item ABC自体の設定パラメータは少ない
               \end{itemize}
@@ -194,7 +197,7 @@
           \begin{mybox}{先行研究}
             \begin{itemize}
             % \item SVMのカーネル関数をRBFに固定した上で、ABCアルゴリズムを用いてSVMのハイパーパラメータの最適化とデータセットの特徴選択を行った[3]
-            \item SVMのハイパーパラメータの最適化とデータセットの特徴選択にABCを適用[3]
+            \item SVMのハイパーパラメータの最適化と\\データセットの特徴選択にABCを適用[3]
             \begin{itemize}
               \item カーネル関数はガウスカーネルに固定
             \end{itemize}
@@ -206,7 +209,7 @@
              \begin{itemize}
             \item  カーネル関数には様々な種類がある
              \end{itemize}
-            \item カーネル関数によってハイパーパラメータは異なる
+            \item カーネル関数によってハイパーパラメータは\\異なる
                \begin{itemize}
                   \item ハイパーパラメータ空間の探索範囲が限定的
                \end{itemize}
@@ -216,14 +219,23 @@
             \begin{mybox}{提案手法}
               \begin{itemize}
                 \item 4つのカーネル関数とそのハイパーパラメータも最適化対象とする
+              \end{itemize}
+                \begin{align*}
+                  \text{線形カーネル： }  K(x, x') &= x \cdot x'\\
+                  \text{ガウスカーネル： }   K(x, x') &= \exp(-\gamma \, \|x - x'\|^2)\\
+                  \text{シグモイドカーネル： }  K(x, x') &= \tanh(\gamma \, x \cdot x' + \rm{coef0})\\
+                  \text{多項式カーネル： }   K(x, x') &= (\gamma \, x \cdot x' + \rm{coef0})^d
+                 \end{align*}
+                 \vspace{-3ex}
+                    \begin{itemize}
                 \item 最適化アルゴリズムはABCアルゴリズムを利用
                 \item 解は5次元のハイパーパラメータの組で表す
                   \begin{itemize}
-                    \item (カーネル関数, C, gamma, coef0, degree)                   
+                    \item (カーネル関数, C, $\gamma$, coef0, d)                   
                   \end{itemize}
                 \item ハイパーパラメータの扱い
                   \begin{itemize} 
-                  \item gamma, coef0, degreeの3つはカーネル関数によって異なる
+                  \item $\gamma$, coef0, dの3つはカーネル関数によって異なる
                   \begin{itemize}  
                     \item 選択されたパラメータのみを更新の対象にする
                   \end{itemize}    
@@ -234,18 +246,13 @@
                   \end{itemize}
                 \end{itemize}
               \end{itemize}
+              \vspace{10mm}
               \begin{align*}
-                P = \frac{f(x_j)}{f(x_i)+f(x_j)}
+              \text{更新確率： }  P = \frac{f(x_j)}{f(x_i)+f(x_j)}
                \end{align*}
                \begin{itemize}
                 \item 探索範囲を広くし、より最適なSVMモデルの探索を可能にする
               \end{itemize} 
-              \begin{align*}
-             \text{線形カーネル： }  K(x, x') &= x \cdot x'\\
-             \text{多項式カーネル： }   K(x, x') &= (\gamma \, x \cdot x' + \text{coef0})^d\\
-             \text{ガウスカーネル： }   K(x, x') &= \exp(-\gamma \, \|x - x'\|^2)\\
-             \text{シグモイドカーネル： }  K(x, x') &= \tanh(\gamma \, x \cdot x' + \text{coef0})
-               \end{align*}
             \end{mybox}
             
            %  \begin{mybox}{今後の予定}
