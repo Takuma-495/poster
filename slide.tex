@@ -19,7 +19,7 @@
 \newenvironment{colorblock}%
 {\begin{beamerboxesrounded}[upper=upcolor,lower=lowcolor,shadow=true]}%
 {\end{beamerboxesrounded}}%
-
+\usefonttheme{professionalfonts}
 %itemizeの設定
 %\setbeamertemplate{itemize item}{\normalsize\raise1.0pt\hbox{$\bullet$}}
 %\setbeamertemplate{itemize subitem}{\normalsize\raise1.0pt\hbox{$\blacktriangleright$}}
@@ -76,15 +76,15 @@
     \begin{itemize}
       \item 蜂の採餌行動に着目した最適化アルゴリズム\footnote{Karaboga, Dervis. An idea based on honey bee swarm for numerical optimization. Vol. 200. Technical report-tr06, Erciyes university, engineering faculty, computer engineering department, 2005.}
       \item 働き蜂、追従蜂、偵察蜂の三種類の蜂によって各食物源の探索を行い、最適解を求める
-      %\item 連続値の最適化を前提としている
+      \item ABC自体の設定パラメータは少ない
     \end{itemize}
   \end{frame}
   \begin{frame}
     \frametitle{先行研究\footnote{近藤 久，浅沼 由馬“人工蜂コロニーアルゴリズムによるランダムフォレストとサポートベクトルマシン
     のハイパーパラメータ最適化と特徴選択”，人工知能学会論文誌, vol34-2, pp.1-11, 2019.}におけるSVMのハイパーパラメータ最適化}
     \begin{itemize}
-      \item ABCアルゴリズムを使用
       \item カーネル関数をガウスカーネルに固定
+      \item ABCアルゴリズムを使用
       \item 最適化したハイパーパラメータ
       \begin{itemize}
         \item SVMの$C$
@@ -111,9 +111,8 @@
     \frametitle{提案手法}
     \begin{itemize}
       \item 4つのカーネル関数とそのハイパーパラメータも最適化対象とする
-      \item ABCアルゴリズムにおける解表現は以下のようにする
       \begin{align*}
-        \text{解表現：(カーネル関数, C, gamma, coef0, degree)}
+        \text{解表現：(カーネル関数, C, $\gamma$, coef0, d)}
       \end{align*}
       \item カーネル関数によって異なるハイパーパラメータは
       カーネル関数の値によって取捨選択する 
