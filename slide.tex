@@ -30,7 +30,7 @@
 \renewcommand{\baselinestretch}{1.1}  % 行間設定
 
 % 本文のタイトルなど
-\title{Artificial Bee Colonyアルゴリズムによる\\サポートベクトルマシン
+\title{Artificial Bee Colonyアルゴリズムによる\\サポートベクターマシン
 のハイパーパラメータ最適化}
 \author{2131007 安達 拓真}
 \institute{千葉工業大学 情報科学部 情報工学科 4年 山口研究室}
@@ -40,14 +40,24 @@
 \begin{document} % ここから本文
 
 % タイトルページ表示
-\section{タイトル}
 \begin{frame}
 \maketitle
 \end{frame}
 
+\section{はじめに}
+
+\begin{frame}
+  \frametitle{はじめに}
+  \begin{itemize}
+    \item 機械学習のハイパーパラメータを自動で調整する研究が行われている
+    \item 先行研究として，Artificial Bee Colonyアルゴリズム(ABC)を用いて，
+    サポートベクターマシン(SVM)のハイパーパラメータ最適化と特徴選択を行った研究がある
+    \item 本研究では，先行研究で最適化対象ではなかったカーネル関数をハイパーパラメータとして扱う手法を提案する
+  \end{itemize}
+\end{frame}
 \section{既存手法} % セクションを入れると PDF に反映される
 \begin{frame}
-\frametitle{サポートベクトルマシン(SVM)}
+\frametitle{サポートベクターマシン(SVM)}
 \begin{itemize}
     \item 1995年にC.Cortesらが提案した機械学習アルゴリズム\footnote{ Cortes, C. and Vapnik, V. Support-vector networks, Ma-chine Learning, Vol.20, No.3, pp.273-297, 1995.}
     \item 非線形データを高次元空間に写像し、線形分離可能にする 
@@ -75,7 +85,7 @@
     \frametitle{Artificial Bee Colony(ABC)アルゴリズム}
     \begin{itemize}
       \item 蜂の採餌行動に着目した最適化アルゴリズム\footnote{Karaboga, Dervis. An idea based on honey bee swarm for numerical optimization. Vol. 200. Technical report-tr06, Erciyes university, engineering faculty, computer engineering department, 2005.}
-      \item 働き蜂、追従蜂、偵察蜂の三種類の蜂によって各食物源の探索を行い、最適解を求める
+      \item 働き蜂、追従蜂、偵察蜂の三種類の蜂によって各食物源の\\探索を行い、最適解を求める
       \item ABC自体の設定パラメータは少ない
     \end{itemize}
   \end{frame}
@@ -83,7 +93,7 @@
     \frametitle{先行研究\footnote{近藤 久，浅沼 由馬“人工蜂コロニーアルゴリズムによるランダムフォレストとサポートベクトルマシン
     のハイパーパラメータ最適化と特徴選択”，人工知能学会論文誌, vol34-2, pp.1-11, 2019.}におけるSVMのハイパーパラメータ最適化}
     \begin{itemize}
-      \item カーネル関数をガウスカーネルに固定
+      \item カーネル関数をRBFカーネルに固定
       \item ABCアルゴリズムを使用
       \item 最適化したハイパーパラメータ
       \begin{itemize}
@@ -93,7 +103,7 @@
       %式書いたほうがいいかも
     \end{itemize}
 \end{frame}
-  \section{問題点}
+\section{提案手法}
   \begin{frame}
     \frametitle{問題点}
     \begin{itemize}
@@ -106,24 +116,187 @@
   \end{itemize}
 \end{frame}
   
-  \section{提案手法}
   \begin{frame}
     \frametitle{提案手法}
     \begin{itemize}
-      \item 4つのカーネル関数とそのハイパーパラメータも最適化対象とする
+      \item 以下の4つのカーネル関数とそのハイパーパラメータも最適化対象とする
+      
       \begin{align*}
-        \text{解表現：(カーネル関数, C, $\gamma$, coef0, d)}
-      \end{align*}
-      \item カーネル関数によって異なるハイパーパラメータは
-      カーネル関数の値によって取捨選択する 
-      \item カーネル関数の更新はランダムに選ばれた個体とのルーレット選択  
-    \end{itemize}
-    \begin{align*}
-      P = \frac{f(x_j)}{f(x_i)+f(x_j)}  
-      \end{align*}
-      \begin{align*}
-      \text{$i$:更新個体~~$j$:ランダムに選ばれた値}
+        \text{線形カーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= \boldsymbol{x_i}^T \cdot \boldsymbol{x_j} \\
+        \text{RBFカーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= \exp\left(-\gamma \| \boldsymbol{x_i} - \boldsymbol{x_j} \|^2\right) \\
+        \text{シグモイドカーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= \tanh(\gamma \boldsymbol{x_i}^T \cdot \boldsymbol{x_j} + \text{coef0}) \\
+        \text{多項式カーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= (\gamma\boldsymbol{x_i}^T \cdot \boldsymbol{x_j} + \text{coef0})^d
     \end{align*}
+    \item ABCにおける解表現は以下の5次元で表す
+    \begin{align*}
+      \text{解表現：(カーネル関数, C, $\gamma$, coef0, d)}
+    \end{align*}
+    \end{itemize}
 \end{frame}
-  
+\begin{frame}
+  \frametitle{カーネル関数が持つハイパーパラメータの扱い}
+  \begin{itemize}
+  \item カーネル関数によってハイパーパラメータの数は異なる
+   \begin{itemize}
+   \item 同じ性質のパラメータが存在することに着目
+  \end{itemize}
+  \item カーネル関数によって異なるハイパーパラメータは
+  カーネル関数の値によって取捨選択する 
+  \item カーネル関数の更新はランダムに選ばれた個体との\\ルーレット選択 
+  \end{itemize}
+  \begin{align*}
+    P = \dfrac{\mathrm{fit}(\boldsymbol{x_j})}
+    {\mathrm{fit}(\boldsymbol{x_i})+\mathrm{fit}(\boldsymbol{x_j})} 
+    \end{align*}
+    \begin{align*}
+    \text{$i$:更新個体~~$j$:ランダムに選ばれた値}
+  \end{align*} 
+\end{frame}
+\section{実験}
+\begin{frame}
+  \frametitle{実験}
+  \begin{itemize}
+    \item 侵入検知問題であるKDD'99データセットを，\\デフォルトパラメータ，既存手法，提案手法で解く
+   　\item 既存手法，先行研究は10回ずつ実行し，平均値をとる
+    \item データセットはランダムに10\%抽出した物を3つ使用する
+    \begin{itemize}
+      \item 学習セット： SVMの学習に使用
+      \item 検証セット： SVMの評価に使用
+      \item テストセット： 最終的に得られた最良解の評価に使用
+    \end{itemize}
+    
+  \end{itemize}
+\end{frame}
+\begin{frame}
+  \frametitle{実験パラメータ}
+  \begin{table}[tb]
+    \scriptsize
+    \centering
+    \caption{ABCの実験パラメータ}  % 表のキャプション
+    \begin{tabular}{|c|c|}  % 2列を定義
+        \hline  % 横線
+        パラメータ & 値 \\  % ヘッダー行
+        \hline  % 横線
+        コロニーサイズ & 20 \\  % 1行目
+        \hline  % 横線
+        LIMIT & 100 \\  % 2行目
+        \hline  % 横線
+        サイクル数 & 500 \\  % 3行目
+        \hline  % 横線
+    \end{tabular}
+    \label{tab:abc_parameters}  % ラベル
+\end{table}
+
+\begin{table}[tb]
+  \scriptsize
+    \centering
+    \caption{SVMの実験パラメータ}  % 表のキャプション
+    \begin{tabular}{|c|c|}  % 2列を定義
+        \hline  % 横線
+        パラメータ & 値 \\  % ヘッダー行
+        \hline  % 横線
+        kernel & [linear, RBF, sigmoid, poly] \\  % 1行目
+        \hline  % 横線
+        $C$ & [$10^{-6}$, 35000] \\  % 2行目
+        \hline  % 横線
+        $\gamma$ & [$10^{-6}$, 32] \\  % 3行目
+        \hline  % 横線
+        coef0 & [0, 10] \\  % 4行目
+        \hline  % 横線
+        $d$ & [1, 3] \\  % 5行目
+        \hline  % 横線
+    \end{tabular}
+    \label{tab:svm_parameters}  % ラベル
+\end{table}
+
+\end{frame}
+\section{結果と考察}
+\begin{frame}
+  \frametitle{実験結果(分類精度と実行時間)}
+  \begin{itemize}
+  \item 提案手法はデフォルトパラメータ，先行研究よりも分類精度が高くなった．
+  \item 実行時間は先行研究よりも長くなった．
+  \end{itemize}
+  \begin{table}[b]
+    \scriptsize
+    \centering
+    \caption{分類精度と実行時間}  % 表のキャプション
+    \begin{tabular}{|c|c|c|c|c|c|c|}  % 3列を定義（c: 中央揃え，|: 縦線）
+        \hline  % 横線
+        ~ & 線形 &RBF &シグモイド&多項式&先行研究 & 提案手法\\  % ヘッダー行
+        \hline  % 横線
+        分類精度[\%]& 99.68&99.78&96.12&99.76&99.88& 99.91\\  % 1行目
+        \hline  % 横線
+        実行時間[h] & - & -&-&-&11.8& 15.5\\  % 2行目
+        \hline  % 横線
+    \end{tabular}
+  \end{table}
+\end{frame}
+\begin{frame}
+  \frametitle{実験結果(評価指標)}
+  \begin{itemize}
+    \item 提案手法ではTP，TNが向上し，FP，FNは減少したため，検知率が向上し，誤警報率は減少した
+      \begin{itemize}
+        \item 侵入検知問題におけるモデルの性能が向上した
+      \end{itemize}
+  \end{itemize}
+
+
+
+  \begin{table}[h]
+    \centering
+    \begin{minipage}{0.48\textwidth}  % 幅を指定
+      \scriptsize
+        \centering
+        \caption{混同行列の値}  % 表のキャプション
+        \begin{tabular}{|c|c|c|}  % 3列を定義（c: 中央揃え，|: 縦線）
+            \hline  % 横線
+            ~ &先行研究 & 提案手法\\  % ヘッダー行
+            \hline  % 横線
+            TP & 39602.4 & 39609.7\\  % 1行目
+            \hline  % 横線
+            TN & 9743.8 & 9748.9\\  % 2行目
+            \hline  % 横線
+            FP & 22.2 & 17.1\\  % 3行目
+            \hline  % 横線
+            FN & 33.6 & 26.3\\  % 4行目
+            \hline  % 横線
+        \end{tabular}
+        \label{result2}  % 表のラベル
+    \end{minipage} \hspace{0.2cm}  % 両表の間隔
+    \begin{minipage}{0.48\textwidth}  % 幅を指定
+      \scriptsize
+        \centering
+        \caption{モデルの評価指標}  % 表のキャプション
+        \begin{tabular}{|c|c|c|}  % 3列を定義（c: 中央揃え，|: 縦線）
+            \hline  % 横線
+            ~ &先行研究 & 提案手法\\  % ヘッダー行
+            \hline  % 横線
+            検知率[\%] & 99.91 & 99.93\\  % 1行目
+            \hline  % 横線
+            誤警報率[\%] & 0.23 & 0.17\\  % 2行目
+            \hline  % 横線
+            適合率[\%] & 99.94 & 99.96\\  % 3行目
+            \hline  % 横線
+            F値[\%] & 99.93 & 99.95\\  % 4行目
+            \hline  % 横線
+        \end{tabular}
+        \label{result3}  % 表のラベル
+    \end{minipage}
+  \end{table}
+\end{frame}
+\begin{frame}
+  \frametitle{考察}
+\end{frame}
+\section{おわりに}
+\begin{frame}
+  \frametitle{おわりに}
+  \begin{itemize}
+    \item カーネル関数もハイパーパラメータとして扱い，最適化する手法を提案
+  \item 提案手法は先行研究よりも分類精度が高くなったが，実行時間は長くなった
+
+  \item 様々なデータセットで提案手法の汎用性を検証する必要がある
+  \end{itemize}
+\end{frame}
   \end{document}
+  
