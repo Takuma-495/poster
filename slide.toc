@@ -1,6 +1,6 @@
 \beamer@sectionintoc {1}{はじめに}{2}{0}{1}
 \beamer@sectionintoc {2}{既存手法}{3}{0}{2}
 \beamer@sectionintoc {3}{提案手法}{6}{0}{3}
-\beamer@sectionintoc {4}{実験}{9}{0}{4}
-\beamer@sectionintoc {5}{結果と考察}{11}{0}{5}
-\beamer@sectionintoc {6}{おわりに}{14}{0}{6}
+\beamer@sectionintoc {4}{実験}{10}{0}{4}
+\beamer@sectionintoc {5}{結果と考察}{12}{0}{5}
+\beamer@sectionintoc {6}{おわりに}{15}{0}{6}

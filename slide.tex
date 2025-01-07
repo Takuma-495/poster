@@ -107,9 +107,9 @@
   \begin{frame}
     \frametitle{問題点}
     \begin{itemize}
-      \item カーネル関数をガウスカーネルに固定している
+      \item カーネル関数をRBFカーネルに固定している
       \begin{itemize}
-       \item SVMにはガウスカーネル以外にも様々なカーネル関数が適用できる      
+       \item SVMにはRBFカーネル以外にも様々なカーネル関数が適用できる      
       \item カーネル関数によってハイパーパラメータが異なる
     \end{itemize}
     \item ハイパーパラメータ空間の探索範囲が限定的
@@ -126,22 +126,34 @@
         \text{RBFカーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= \exp\left(-\gamma \| \boldsymbol{x_i} - \boldsymbol{x_j} \|^2\right) \\
         \text{シグモイドカーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= \tanh(\gamma \boldsymbol{x_i}^T \cdot \boldsymbol{x_j} + \text{coef0}) \\
         \text{多項式カーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= (\gamma\boldsymbol{x_i}^T \cdot \boldsymbol{x_j} + \text{coef0})^d
-    \end{align*}
-    \item ABCにおける解表現は以下の5次元で表す
-    \begin{align*}
-      \text{解表現：(カーネル関数, C, $\gamma$, coef0, d)}
-    \end{align*}
+       \end{align*}
     \end{itemize}
-\end{frame}
+  \end{frame}
 \begin{frame}
   \frametitle{カーネル関数が持つハイパーパラメータの扱い}
   \begin{itemize}
   \item カーネル関数によってハイパーパラメータの数は異なる
-   \begin{itemize}
-   \item 同じ性質のパラメータが存在することに着目
+  \item  同じ性質のパラメータが存在することに着目
+      \begin{itemize}
+      \item 4つのカーネル関数のパラメータの合計は6個
+      \item 性質ごとに分けると3個
+     \end{itemize}
+  \item  他のカーネル関数で使用するパラメータの値をそのまま使用
+     \begin{itemize}
+     \item  ランダム性により解の多様性が生まれる
+    \end{itemize}
   \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{カーネル関数が持つハイパーパラメータの扱い}
+  \begin{itemize}
+  \item ABCにおける解表現は以下の5次元で表す
+  \begin{align*}
+    \text{解表現：(カーネル関数, C, $\gamma$, coef0, d)}
+  \end{align*}
   \item カーネル関数によって異なるハイパーパラメータは
-  カーネル関数の値によって取捨選択する 
+       カーネル関数の値によって活性，非活性となる
   \item カーネル関数の更新はランダムに選ばれた個体との\\ルーレット選択 
   \end{itemize}
   \begin{align*}
@@ -152,12 +164,13 @@
     \text{$i$:更新個体~~$j$:ランダムに選ばれた値}
   \end{align*} 
 \end{frame}
+
 \section{実験}
 \begin{frame}
   \frametitle{実験}
   \begin{itemize}
     \item 侵入検知問題であるKDD'99データセットを，\\デフォルトパラメータ，既存手法，提案手法で解く
-   　\item 既存手法，先行研究は10回ずつ実行し，平均値をとる
+   　\item 既存手法，提案手法は10回ずつ実行し，平均値をとる
     \item データセットはランダムに10\%抽出した物を3つ使用する
     \begin{itemize}
       \item 学習セット： SVMの学習に使用
@@ -214,8 +227,8 @@
 \begin{frame}
   \frametitle{実験結果(分類精度と実行時間)}
   \begin{itemize}
-  \item 提案手法はデフォルトパラメータ，先行研究よりも分類精度が高くなった．
-  \item 実行時間は先行研究よりも長くなった．
+  \item 提案手法はデフォルトパラメータ，既存手法よりも分類精度が高くなった．
+  \item 実行時間は既存手法よりも長くなった．
   \end{itemize}
   \begin{table}[b]
     \scriptsize
@@ -223,7 +236,7 @@
     \caption{分類精度と実行時間}  % 表のキャプション
     \begin{tabular}{|c|c|c|c|c|c|c|}  % 3列を定義（c: 中央揃え，|: 縦線）
         \hline  % 横線
-        ~ & 線形 &RBF &シグモイド&多項式&先行研究 & 提案手法\\  % ヘッダー行
+        ~ & 線形 &RBF &シグモイド&多項式&既存手法 & 提案手法\\  % ヘッダー行
         \hline  % 横線
         分類精度[\%]& 99.68&99.78&96.12&99.76&99.88& 99.91\\  % 1行目
         \hline  % 横線
@@ -287,13 +300,34 @@
 \end{frame}
 \begin{frame}
   \frametitle{考察}
+  \begin{itemize}
+    \item 提案手法で実行時間が長くなってしまった原因
+    \begin{itemize}
+      \item  カーネル関数をハイパーパラメータとして扱い探索範囲を\\広げたこと
+    \end{itemize}
+    \item 既存手法ではRBFカーネルのみを使用
+    \item RBFカーネルは汎用性が高く，他のカーネル関数に比べて学習時間が短い傾向にある
+    \begin{itemize}
+      \item RBFカーネル以外のカーネル関数の個体の評価に時間が\\かかった可能性
+    \end{itemize}
+  \end{itemize}
 \end{frame}
+%\begin{frame}
+%  \frametitle{考察}
+ % \begin{itemize}
+ %   \item 提案手法で求まったハイパーパラメータは10回の試行すべてでRBFカーネルを使用していた
+ %   \begin{itemize}
+ %     \item 最終的には既存手法と同じカーネル関数を使用している
+ %     \item データセットによって最適なカーネル関数は決まっている可能性
+ %   \end{itemize}
+ % \end{itemize}
+%\end{frame}
 \section{おわりに}
 \begin{frame}
   \frametitle{おわりに}
   \begin{itemize}
-    \item カーネル関数もハイパーパラメータとして扱い，最適化する手法を提案
-  \item 提案手法は先行研究よりも分類精度が高くなったが，実行時間は長くなった
+    \item カーネル関数もハイパーパラメータとして扱い，SVMの\\ハイパーパラメータを最適化する手法を提案
+  \item 提案手法は先行研究よりも分類精度が高くなったが，\\実行時間は長くなった
 
   \item 様々なデータセットで提案手法の汎用性を検証する必要がある
   \end{itemize}
