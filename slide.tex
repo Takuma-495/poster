@@ -34,7 +34,7 @@
 のハイパーパラメータ最適化}
 \author{2131007 安達 拓真}
 \institute{千葉工業大学 情報科学部 情報工学科 4年 山口研究室}
-\date{2024年9月3日}
+\date{2024年1月24日}
 
 
 \begin{document} % ここから本文
@@ -49,8 +49,9 @@
 \begin{frame}
   \frametitle{はじめに}
   \begin{itemize}
-    \item 機械学習のハイパーパラメータを自動で調整する研究が行われている
-    \item 先行研究として，Artificial Bee Colonyアルゴリズム(ABC)を用いて，
+    \item 機械学習にとってハイパーパラメータはモデルの性能を\\決める重要な値
+    \item ハイパーパラメータを自動で調整する研究が行われている
+    \item 先行研究として，Artificial Bee Colony(ABC)アルゴリズムを用いて，
     サポートベクターマシン(SVM)のハイパーパラメータ最適化と特徴選択を行った研究がある
     \item 本研究では，先行研究で最適化対象ではなかったカーネル関数をハイパーパラメータとして扱う手法を提案する
   \end{itemize}
@@ -59,8 +60,8 @@
 \begin{frame}
 \frametitle{サポートベクターマシン(SVM)}
 \begin{itemize}
-    \item 1995年にC.Cortesらが提案した機械学習アルゴリズム\footnote{ Cortes, C. and Vapnik, V. Support-vector networks, Ma-chine Learning, Vol.20, No.3, pp.273-297, 1995.}
-    \item 非線形データを高次元空間に写像し、線形分離可能にする 
+    \item 1995年に提案された，分類や回帰に使用される機械学習\\アルゴリズム\footnote{ Cortes, C. and Vapnik, V. Support-vector networks, Ma-chine Learning, Vol.20, No.3, pp.273-297, 1995.}
+    \item 非線形データを高次元空間に写像し，線形分離可能にする 
     \item データを分類する最適な境界線(超平面)を探す                
   \end{itemize}
   \begin{figure}
@@ -85,7 +86,7 @@
     \frametitle{Artificial Bee Colony(ABC)アルゴリズム}
     \begin{itemize}
       \item 蜂の採餌行動に着目した最適化アルゴリズム\footnote{Karaboga, Dervis. An idea based on honey bee swarm for numerical optimization. Vol. 200. Technical report-tr06, Erciyes university, engineering faculty, computer engineering department, 2005.}
-      \item 働き蜂、追従蜂、偵察蜂の三種類の蜂によって各食物源の\\探索を行い、最適解を求める
+      \item 働き蜂，追従蜂，偵察蜂の三種類の蜂によって各食物源の\\探索を行い，最適解を求める
       \item ABC自体の設定パラメータは少ない
     \end{itemize}
   \end{frame}
@@ -98,7 +99,7 @@
       \item 最適化したハイパーパラメータ
       \begin{itemize}
         \item SVMの$C$
-        \item ガウスカーネルの$\gamma$
+        \item RBFカーネルの$\gamma$
       \end{itemize}
       %式書いたほうがいいかも
     \end{itemize}
@@ -132,10 +133,10 @@
 \begin{frame}
   \frametitle{カーネル関数が持つハイパーパラメータの扱い}
   \begin{itemize}
-  \item カーネル関数によってハイパーパラメータの数は異なる
+  \item ABCでハイパーパラメータが異なるカーネル関数を同時に扱う必要がある
   \item  同じ性質のパラメータが存在することに着目
       \begin{itemize}
-      \item 4つのカーネル関数のパラメータの合計は6個
+      \item 4つのカーネル関数のハイパーパラメータの合計は6個
       \item 性質ごとに分けると3個
      \end{itemize}
   \item  他のカーネル関数で使用するパラメータの値をそのまま使用
