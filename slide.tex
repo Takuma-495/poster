@@ -87,6 +87,7 @@
     \begin{itemize}
       \item 蜂の採餌行動に着目した最適化アルゴリズム\footnote{Karaboga, Dervis. An idea based on honey bee swarm for numerical optimization. Vol. 200. Technical report-tr06, Erciyes university, engineering faculty, computer engineering department, 2005.}
       \item 働き蜂，追従蜂，偵察蜂の三種類の蜂によって各食物源の\\探索を行い，最適解を求める
+      \item 最適化対象は実数値
       \item ABC自体の設定パラメータは少ない
     \end{itemize}
   \end{frame}
@@ -147,25 +148,48 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{カーネル関数が持つハイパーパラメータの扱い}
+  \frametitle{食物源の形とハイパーパラメータの扱い}
   \begin{itemize}
-  \item ABCにおける解表現は以下の5次元で表す
-  \begin{align*}
-    \text{解表現：(カーネル関数, C, $\gamma$, coef0, d)}
-  \end{align*}
+  \item ABCにおける食物源は5個の数値で表す
+  \begin{table}[h]
+    \centering
+    \renewcommand{\arraystretch}{0.9} % セル内の高さを0.8倍に設定
+    \caption{食物源の形}
+    \begin{tabular}{|c|c|c|c|c|c|}
+      \hline
+      変数           & カーネル関数 & $C$ &$ \gamma$ & coef0& $d$\\ \hline
+      型       & 文字列              & 実数           & 実数                   & 実数           & 整数          \\ \hline
+      数値          & \{1,2,3,4\}              & [0,1]           & [0,1]                  & [0,1]           & [0,1]          \\ \hline
+      \end{tabular}
+    
+    \label{tab:variables}
+    \end{table}
   \item カーネル関数によって異なるハイパーパラメータは
        カーネル関数の値によって活性，非活性となる
-  \item カーネル関数の更新はランダムに選ばれた個体との\\ルーレット選択 
+  \item $C$,$ \gamma$,coef0,$d$は以下の式によってSVMに適用される値に変換される
+  \begin{itemize}
+    \item 整数である$d$は四捨五入を行う
   \end{itemize}
+\end{itemize}
   \begin{align*}
-    P = \dfrac{\mathrm{fit}(\boldsymbol{x_j})}
-    {\mathrm{fit}(\boldsymbol{x_i})+\mathrm{fit}(\boldsymbol{x_j})} 
-    \end{align*}
-    \begin{align*}
-    \text{$i$:更新個体~~$j$:ランダムに選ばれた値}
-  \end{align*} 
+    \label{map}
+    A =a(a_{max} -a_{min}) + a_{min}
+  \end{align*}
 \end{frame}
-
+\begin{frame}
+  \frametitle{カーネル関数の扱い}
+  \begin{itemize}
+  \item カーネル関数はカテゴリ変数であるためABCの更新式が適用できない
+  \item カーネル関数の更新はランダムに選ばれた個体との\\ルーレット選択 
+\end{itemize}
+\begin{align*}
+  P = \dfrac{\mathrm{fit}(\boldsymbol{x_j})}
+  {\mathrm{fit}(\boldsymbol{x_i})+\mathrm{fit}(\boldsymbol{x_j})} 
+  \end{align*}
+  \begin{align*}
+  \text{$i$:更新個体~~$j$:ランダムに選ばれた値}
+\end{align*} 
+\end{frame}
 \section{実験}
 \begin{frame}
   \frametitle{実験}
