@@ -96,7 +96,7 @@
     のハイパーパラメータ最適化と特徴選択”，人工知能学会論文誌, vol34-2, pp.1-11, 2019.}におけるSVMのハイパーパラメータ最適化}
     \begin{itemize}
       \item カーネル関数をRBFカーネルに固定
-      \item ABCアルゴリズムを使用
+      \item  最適化にはABCを使用
       \item 最適化したハイパーパラメータ
       \begin{itemize}
         \item SVMの$C$
@@ -179,7 +179,7 @@
 \begin{frame}
   \frametitle{カーネル関数の扱い}
   \begin{itemize}
-  \item カーネル関数はカテゴリ変数であるためABCの更新式が適用できない
+  \item カーネル関数は文字列であるためABCの更新式が適用できない
   \item カーネル関数の更新はランダムに選ばれた個体との\\ルーレット選択 
 \end{itemize}
 \begin{align*}
