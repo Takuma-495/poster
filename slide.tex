@@ -2,6 +2,7 @@
 % パッケージの追加
 \usepackage{graphicx} % 図を表示するためのパッケージの追加
 \usepackage{bm} % 太字イタリックを使えるようにする 
+\usepackage[labelformat=empty]{caption}
 
 % beamer に関する設定
 % Adobe Reader の文字化けを防ぐおまじない
@@ -125,9 +126,9 @@
       
       \begin{align*}
         \text{線形カーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= \boldsymbol{x_i}^T \cdot \boldsymbol{x_j} \\
-        \text{RBFカーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= \exp\left(-\gamma \| \boldsymbol{x_i} - \boldsymbol{x_j} \|^2\right) \\
-        \text{シグモイドカーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= \tanh(\gamma \boldsymbol{x_i}^T \cdot \boldsymbol{x_j} + \text{coef0}) \\
-        \text{多項式カーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= (\gamma\boldsymbol{x_i}^T \cdot \boldsymbol{x_j} + \text{coef0})^d
+        \text{RBFカーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= \exp\left(-\gamma_0 \| \boldsymbol{x_i} - \boldsymbol{x_j} \|^2\right) \\
+        \text{シグモイドカーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= \tanh(\gamma_1 \boldsymbol{x_i}^T \cdot \boldsymbol{x_j} + \text{coef0}_0) \\
+        \text{多項式カーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= (\gamma_2\boldsymbol{x_i}^T \cdot \boldsymbol{x_j} + \text{coef0}_1)^d
        \end{align*}
     \end{itemize}
   \end{frame}
@@ -151,6 +152,7 @@
   \frametitle{食物源の形とハイパーパラメータの扱い}
   \begin{itemize}
   \item ABCにおける食物源は5個の数値で表す
+   \end{itemize}
   \begin{table}[h]
     \centering
     \renewcommand{\arraystretch}{0.9} % セル内の高さを0.8倍に設定
@@ -164,17 +166,18 @@
     
     \label{tab:variables}
     \end{table}
-  \item カーネル関数によって異なるハイパーパラメータは
-       カーネル関数の値によって活性，非活性となる
+    \begin{itemize}
   \item $C$,$ \gamma$,coef0,$d$は以下の式によってSVMに適用される値に変換される
   \begin{itemize}
     \item 整数である$d$は四捨五入を行う
   \end{itemize}
-\end{itemize}
   \begin{align*}
     \label{map}
     A =a(a_{max} -a_{min}) + a_{min}
   \end{align*}
+  \item カーネル関数によって異なるハイパーパラメータは
+  カーネル関数の値によって活性，非活性となる
+\end{itemize}
 \end{frame}
 \begin{frame}
   \frametitle{カーネル関数の扱い}
@@ -353,8 +356,10 @@
   \begin{itemize}
     \item カーネル関数もハイパーパラメータとして扱い，SVMの\\ハイパーパラメータを最適化する手法を提案
   \item 提案手法は先行研究よりも分類精度が高くなったが，\\実行時間は長くなった
-
+  \item 探索範囲を広げたことで，データセットに応じた柔軟なモデル構築が可能となる
+   \begin{itemize}
   \item 様々なデータセットで提案手法の汎用性を検証する必要がある
+\end{itemize}
   \end{itemize}
 \end{frame}
   \end{document}
