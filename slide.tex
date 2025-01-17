@@ -3,6 +3,7 @@
 \usepackage{graphicx} % 図を表示するためのパッケージの追加
 \usepackage{bm} % 太字イタリックを使えるようにする 
 \usepackage[labelformat=empty]{caption}
+\usepackage{multirow}
 
 % beamer に関する設定
 % Adobe Reader の文字化けを防ぐおまじない
@@ -92,6 +93,8 @@
       \item ABC自体の設定パラメータは少ない
     \end{itemize}
   \end{frame}
+
+
   \begin{frame}
     \frametitle{先行研究\footnote{近藤 久，浅沼 由馬“人工蜂コロニーアルゴリズムによるランダムフォレストとサポートベクトルマシン
     のハイパーパラメータ最適化と特徴選択”，人工知能学会論文誌, vol34-2, pp.1-11, 2019.}におけるSVMのハイパーパラメータ最適化}
@@ -106,6 +109,7 @@
       %式書いたほうがいいかも
     \end{itemize}
 \end{frame}
+
 \section{提案手法}
   \begin{frame}
     \frametitle{問題点}
@@ -122,8 +126,7 @@
   \begin{frame}
     \frametitle{提案手法}
     \begin{itemize}
-      \item 以下の4つのカーネル関数とそのハイパーパラメータも最適化対象とする
-      
+      \item 以下の4つのカーネル関数とそのハイパーパラメータも最適化対象とする 
       \begin{align*}
         \text{線形カーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= \boldsymbol{x_i}^T \cdot \boldsymbol{x_j} \\
         \text{RBFカーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= \exp\left(-\gamma_0 \| \boldsymbol{x_i} - \boldsymbol{x_j} \|^2\right) \\
@@ -132,6 +135,8 @@
        \end{align*}
     \end{itemize}
   \end{frame}
+
+
 \begin{frame}
   \frametitle{カーネル関数が持つハイパーパラメータの扱い}
   \begin{itemize}
@@ -179,6 +184,8 @@
   カーネル関数の値によって活性，非活性となる
 \end{itemize}
 \end{frame}
+
+
 \begin{frame}
   \frametitle{カーネル関数の扱い}
   \begin{itemize}
@@ -193,12 +200,14 @@
   \text{$i$:更新個体~~$j$:ランダムに選ばれた値}
 \end{align*} 
 \end{frame}
+
+
 \section{実験}
 \begin{frame}
   \frametitle{実験}
   \begin{itemize}
     \item 侵入検知問題であるKDD'99データセットを，\\デフォルトパラメータ，既存手法，提案手法で解く
-   　\item 既存手法，提案手法は10回ずつ実行し，平均値をとる
+   \item 既存手法，提案手法は10回ずつ実行し，平均値をとる
     \item データセットはランダムに10\%抽出した物を3つ使用する
     \begin{itemize}
       \item 学習セット： SVMの学習に使用
@@ -208,6 +217,8 @@
     
   \end{itemize}
 \end{frame}
+
+
 \begin{frame}
   \frametitle{実験パラメータ}
   \begin{table}[tb]
@@ -249,8 +260,8 @@
     \end{tabular}
     \label{tab:svm_parameters}  % ラベル
 \end{table}
-
 \end{frame}
+
 \section{結果と考察}
 \begin{frame}
   \frametitle{実験結果(分類精度と実行時間)}
@@ -273,37 +284,31 @@
     \end{tabular}
   \end{table}
 \end{frame}
+
 \begin{frame}
   \frametitle{評価指標}
-\begin{itemize}
-本研究では，検知率，誤警報率，適合率，F値の4つの評価指標を算出する．
-これら4つの指標を得るために必要な値を以下に示す．
-\begin{itemize}
-    \item 真陽性(TP)：攻撃状態として分類され，実際に攻撃状態だったデータ数
-    \item 真陰性(TN)：通常状態として分類され，実際に通常状態だったデータ数
-    \item 偽陽性(FP)：攻撃状態として分類され，実際には通常状態だったデータ数
-    \item 偽陰性(FN)：通常状態として分類され，実際には攻撃状態だったデータ数
-\end{itemize}
-TP，TN，FP，FNによって検知率，誤警報率，適合率，F値
-はそれぞれ(\ref{detect})〜(\ref{Fvalue})式で算出される．
-
+  \begin{itemize}
+    \item  モデルの評価指標として検知率，誤警報率，適合率，F値を使用する
+  \end{itemize}
+  \begin{table}[h]
+    \centering
+    \caption{混同行列}
+    \begin{tabular}{c|c|c|c|}
+        \multicolumn{2}{c}{} & \multicolumn{2}{c}{実際のクラス} \\ \cline{3-4}
+        \multicolumn{2}{c|}{} & 攻撃& 通常\\ \cline{2-4}
+        \multirow{2}{*}{予測クラス} 
+        & 攻撃 & TP & FP \\ \cline{2-4}
+        & 通常 & FN & TN\\ \cline{2-4}
+    \end{tabular}
+    \label{tab:confusion_matrix}
+\end{table}
 \setlength{\jot}{12pt}
-\begin{align}
-\text{検知率} &= \dfrac{TP}{TP + FN}\label{detect}\\
-\text{誤警報率} &= \dfrac{FP}{TN + FP}\\
-\text{適合率} &= \dfrac{TP}{TP + FP}\\
-\text{F値} &= \dfrac{2\text{*検知率*適合率}}{\text{検知率}+\text{適合率}}\label{Fvalue}
-\end{align}
-
-検知率は，攻撃状態を検知できた割合．
-誤警報率は，通常状態のデータを攻撃状態と分類した割合．
-適合率は，攻撃状態として分類され実際に攻撃状態だった割合．
-F値は検知率と適合率の調和平均である．
-
-侵入検知問題においては検知率，誤警報率，F値を向上させ，
-適合率を減少させることが目的となる．
-\end{itemize}
+\begin{align*}
+\text{検知率} &= \dfrac{TP}{TP + FN},~~\text{誤警報率} = \dfrac{FP}{TN + FP}\\
+\text{適合率} &= \dfrac{TP}{TP + FP},~~\text{F値} = \dfrac{2\text{*検知率*適合率}}{\text{検知率}+\text{適合率}}
+\end{align*}
 \end{frame}
+
 \begin{frame}
   \frametitle{実験結果(評価指標)}
   \begin{itemize}
@@ -311,10 +316,8 @@ F値は検知率と適合率の調和平均である．
       \begin{itemize}
         \item 侵入検知問題におけるモデルの性能が向上した
       \end{itemize}
+    \end{itemize}
   
-
-
-
   \begin{table}[h]
     \centering
     \begin{minipage}{0.48\textwidth}  % 幅を指定
@@ -357,6 +360,8 @@ F値は検知率と適合率の調和平均である．
     \end{minipage}
   \end{table}
 \end{frame}
+
+
 \begin{frame}
   \frametitle{考察}
   \begin{itemize}

@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p3.9.1-210218-2.6 (utf8.euc) (TeX Live 2022/dev/Debian) (preloaded format=platex 2024.4.25)  17 JAN 2025 15:30
+This is e-pTeX, Version 3.141592653-p3.9.1-210218-2.6 (utf8.euc) (TeX Live 2022/dev/Debian) (preloaded format=platex 2024.4.25)  17 JAN 2025 17:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -715,6 +715,13 @@ Package caption Info: hyperref package is loaded.
 Package caption Info: Hyperref support is turned off
 (caption)             because hyperref has stopped early.
 )
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
+\multirow@colwidth=\skip64
+\multirow@cntb=\count333
+\multirow@dima=\skip65
+\bigstrutjot=\dimen307
+)
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerthemeSingapore.sty
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerouterthememiniframes.sty)
 )
@@ -724,39 +731,39 @@ s.sty)
 File: l3backend-dvipdfmx.def 2022-01-12 L3 backend support: dvipdfmx
 
 (|extractbb --version)
-\c__kernel_sys_dvipdfmx_version_int=\count333
-\l__color_backend_stack_int=\count334
-\g__color_backend_stack_int=\count335
-\g__graphics_track_int=\count336
+\c__kernel_sys_dvipdfmx_version_int=\count334
+\l__color_backend_stack_int=\count335
+\g__color_backend_stack_int=\count336
+\g__graphics_track_int=\count337
 \l__pdf_internal_box=\box93
-\g__pdf_backend_object_int=\count337
-\g__pdf_backend_annotation_int=\count338
-\g__pdf_backend_link_int=\count339
+\g__pdf_backend_object_int=\count338
+\g__pdf_backend_annotation_int=\count339
+\g__pdf_backend_link_int=\count340
 ) (./slide.aux)
 \openout1 = `slide.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
 
 *geometry* detected driver: dvipdfm
 *geometry* verbose mode - [ preamble ] result:
@@ -791,7 +798,7 @@ LaTeX Font Info:    ... okay on input line 41.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring OFF on input line 41.
+Package hyperref Info: Link coloring OFF on input line 42.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 
@@ -801,11 +808,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count340
+\c@section@level=\count341
 )
-LaTeX Info: Redefining \ref on input line 41.
-LaTeX Info: Redefining \pageref on input line 41.
-LaTeX Info: Redefining \nameref on input line 41.
+LaTeX Info: Redefining \ref on input line 42.
+LaTeX Info: Redefining \pageref on input line 42.
+LaTeX Info: Redefining \nameref on input line 42.
 
 (./slide.out) (./slide.out)
 \@outlinefile=\write5
@@ -841,20 +848,20 @@ Package caption Info: End \AtBeginDocument code.
  (./slide.nav) [1
 
 ]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 59.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 60.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 59.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 60.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for OT1+mathkerncmss on inp
-ut line 59.
+ut line 60.
 
 (/usr/share/texlive/texmf-dist/tex/latex/sansmathaccent/ot1mathkerncmss.fd
 File: ot1mathkerncmss.fd 2020/01/31 Fontinst v1.933 font definitions for OT1/ma
@@ -874,7 +881,7 @@ File: syazou.png Graphic file (type bmp)
 ] [6
 
 ]
-Overfull \hbox (1.99638pt too wide) detected at line 134
+Overfull \hbox (1.99638pt too wide) detected at line 137
 []
  []
 
@@ -884,13 +891,13 @@ Overfull \hbox (1.99638pt too wide) detected at line 134
 
 ]
 LaTeX Font Info:    Trying to load font information for OMS+cmss on input line 
-181.
-LaTeX Font Info:    No file OMScmss.fd. on input line 181.
+186.
+LaTeX Font Info:    No file OMScmss.fd. on input line 186.
 
 
 LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbraceleft' on input line 181.
+(Font)              for symbol `textbraceleft' on input line 186.
 
 [9
 
@@ -907,6 +914,8 @@ LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
 ] [15
 
 ] [16
+
+] [17
 
 ]
 \tf@nav=\write6
@@ -926,12 +935,12 @@ Package rerunfilecheck Info: File `slide.out' has not changed.
 (rerunfilecheck)             Checksum: 5A8C833191A540043A78123A3866177A;279.
  ) 
 Here is how much of TeX's memory you used:
- 22773 strings out of 479850
- 445997 string characters out of 5887378
- 714007 words of memory out of 5000000
- 40602 multiletter control sequences out of 15000+600000
+ 22845 strings out of 479850
+ 447339 string characters out of 5887378
+ 715951 words of memory out of 5000000
+ 40670 multiletter control sequences out of 15000+600000
  504265 words of font info for 144 fonts, out of 8000000 for 9000
  264 hyphenation exceptions out of 8191
  128i,19n,122p,443b,910s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on slide.dvi (16 pages, 224548 bytes).
+Output written on slide.dvi (17 pages, 249460 bytes).

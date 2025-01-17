@@ -2,5 +2,6 @@
 \beamer@slide {map}{9}
 \beamer@slide {tab:abc_parameters}{12}
 \beamer@slide {tab:svm_parameters}{12}
-\beamer@slide {result2}{14}
-\beamer@slide {result3}{14}
+\beamer@slide {tab:confusion_matrix}{14}
+\beamer@slide {result2}{15}
+\beamer@slide {result3}{15}

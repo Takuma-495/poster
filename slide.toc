@@ -3,4 +3,4 @@
 \beamer@sectionintoc {3}{提案手法}{6}{0}{3}
 \beamer@sectionintoc {4}{実験}{11}{0}{4}
 \beamer@sectionintoc {5}{結果と考察}{13}{0}{5}
-\beamer@sectionintoc {6}{おわりに}{16}{0}{6}
+\beamer@sectionintoc {6}{おわりに}{17}{0}{6}
