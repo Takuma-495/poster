@@ -274,13 +274,44 @@
   \end{table}
 \end{frame}
 \begin{frame}
+  \frametitle{評価指標}
+\begin{itemize}
+本研究では，検知率，誤警報率，適合率，F値の4つの評価指標を算出する．
+これら4つの指標を得るために必要な値を以下に示す．
+\begin{itemize}
+    \item 真陽性(TP)：攻撃状態として分類され，実際に攻撃状態だったデータ数
+    \item 真陰性(TN)：通常状態として分類され，実際に通常状態だったデータ数
+    \item 偽陽性(FP)：攻撃状態として分類され，実際には通常状態だったデータ数
+    \item 偽陰性(FN)：通常状態として分類され，実際には攻撃状態だったデータ数
+\end{itemize}
+TP，TN，FP，FNによって検知率，誤警報率，適合率，F値
+はそれぞれ(\ref{detect})〜(\ref{Fvalue})式で算出される．
+
+\setlength{\jot}{12pt}
+\begin{align}
+\text{検知率} &= \dfrac{TP}{TP + FN}\label{detect}\\
+\text{誤警報率} &= \dfrac{FP}{TN + FP}\\
+\text{適合率} &= \dfrac{TP}{TP + FP}\\
+\text{F値} &= \dfrac{2\text{*検知率*適合率}}{\text{検知率}+\text{適合率}}\label{Fvalue}
+\end{align}
+
+検知率は，攻撃状態を検知できた割合．
+誤警報率は，通常状態のデータを攻撃状態と分類した割合．
+適合率は，攻撃状態として分類され実際に攻撃状態だった割合．
+F値は検知率と適合率の調和平均である．
+
+侵入検知問題においては検知率，誤警報率，F値を向上させ，
+適合率を減少させることが目的となる．
+\end{itemize}
+\end{frame}
+\begin{frame}
   \frametitle{実験結果(評価指標)}
   \begin{itemize}
     \item 提案手法ではTP，TNが向上し，FP，FNは減少したため，検知率が向上し，誤警報率は減少した
       \begin{itemize}
         \item 侵入検知問題におけるモデルの性能が向上した
       \end{itemize}
-  \end{itemize}
+  
 
 
 
