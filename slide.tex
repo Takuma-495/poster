@@ -360,7 +360,32 @@
     \end{minipage}
   \end{table}
 \end{frame}
-
+\begin{frame}
+  \frametitle{データの有意性}
+  \begin{itemize}
+    \item 既存手法と提案手法の実験結果に有意差があるかどうかを，t検定により検証した
+    \item すべての評価指標でp値が0.05未満のため，有意水準5\%で有意差ありと言える
+  \end{itemize}
+  \begin{table}[b]
+    \centering
+    \caption{t検定のp値}  % 表のキャプション
+    \begin{tabular}{|c|c|}  % 3列を定義（c: 中央揃え，|: 縦線）
+        \hline  % 横線
+        ~ & p値 \\
+        \hline  % 横線
+        分類精度 & 0.00020\\
+        \hline  % 横線
+        検知率  & 0.028\\
+        \hline  % 横線
+        誤警報率 &0.0076\\
+        \hline 
+        適合率 &0.013\\
+        \hline
+        F値 & 0.0025\\
+        \hline
+    \end{tabular}
+  \end{table}
+\end{frame}
 
 \begin{frame}
   \frametitle{考察}
@@ -399,4 +424,3 @@
   \end{itemize}
 \end{frame}
   \end{document}
-  
