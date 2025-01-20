@@ -363,8 +363,14 @@
 \begin{frame}
   \frametitle{データの有意性}
   \begin{itemize}
-    \item 既存手法と提案手法の実験結果に有意差があるかどうかを，t検定により検証した
+    \item 既存手法と提案手法の実験結果の有意性を，t検定により\\検証した
+     \begin{itemize}
+      \item  p値：既存手法と提案手法のデータに差がないと仮定した時に，本実験の結果が起こる確率
+     \end{itemize}
     \item すべての評価指標でp値が0.05未満のため，有意水準5\%で有意差ありと言える
+    \begin{itemize}
+    \item 特に分類精度はp値が低いため，有意な結果が得られた
+     \end{itemize}
   \end{itemize}
   \begin{table}[b]
     \centering
